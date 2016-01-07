@@ -7,7 +7,7 @@ This is a menu for node terminal applications.
 ### Example usage
 
 ```bash
-var menuCreator = require('./menu');
+var menuCreator = require('mini-menu');
 
 var menu = menuCreator();
 menu.title = "MINI-MENU";
