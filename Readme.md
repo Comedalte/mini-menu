@@ -37,4 +37,4 @@ menu.show();
 
 ### Screenshot
 
-![mini-menu example](./example.jpg)
+![mini-menu example](https://github.com/Comedalte/mini-menu/raw/master/example.jpg)
