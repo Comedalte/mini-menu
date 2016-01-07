@@ -36,3 +36,5 @@ menu.show();
 ```
 
 ### Screenshot
+
+![mini-menu example](./example.jpg)
