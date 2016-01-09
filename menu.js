@@ -36,6 +36,7 @@ var menu = function() {
 		  output: process.stdout
 		});
 		currentMenu = obj;
+		currentMenu.isListening = true;
 		if (!firstmenu) {
 			first = true;
 		} else {
@@ -91,6 +92,7 @@ var menu = function() {
 		return string + new Array(padding-string.length).join(" ");
 	}
 
+	obj.isListening = false;
 	
 	
 	return obj;
@@ -98,9 +100,7 @@ var menu = function() {
 
 // listen for the "keypress" event 
 process.stdin.on('keypress', function (ch, key) {
-
-	readline.moveCursor(rl,-1,0);
-	readline.clearScreenDown(rl);
+	
 
 	if (key && key.ctrl && key.name == 'c') {
 		console.log("\n");
@@ -108,8 +108,10 @@ process.stdin.on('keypress', function (ch, key) {
 	}
 
 
-	if (typeof key != "undefined" && key.hasOwnProperty("name") && key.name=="down") {
 
+	if (currentMenu.isListening && typeof key != "undefined" && key.hasOwnProperty("name") && key.name=="down") {
+		readline.moveCursor(rl,-1,0);
+		readline.clearScreenDown(rl);
 		if (currentMenu.selected+1<currentMenu.items.length) {
 			currentMenu.selected++;
 			currentMenu.clear(0);
@@ -118,22 +120,26 @@ process.stdin.on('keypress', function (ch, key) {
 		
 	}
 
-	if (typeof key != "undefined" && key.hasOwnProperty("name") && key.name=="up") {
+	if (currentMenu.isListening && typeof key != "undefined" && key.hasOwnProperty("name") && key.name=="up") {
+		readline.moveCursor(rl,-1,0);
+		readline.clearScreenDown(rl);
 		if (currentMenu.selected>0) 
 			currentMenu.selected--;
 
 		currentMenu.clear(0);
 		currentMenu.print();
-
 	}
 
-	if (typeof key != "undefined" && key.hasOwnProperty("name") && key.name=="return") {
+	if (currentMenu.isListening && typeof key != "undefined" && key.hasOwnProperty("name") && key.name=="return") {
 
-		currentMenu.clear();
+		currentMenu.isListening = false;
 		rl.close();
-		r1 = null;			
+		r1 = null;	
+		process.stdin.pause();	
 		currentMenu.items[currentMenu.selected].callback();
+
 	}
+	
 
 });
 
