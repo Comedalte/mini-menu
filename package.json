@@ -1,6 +1,6 @@
 {
   "name": "mini-menu",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "menu for node terminal",
   "main": "menu.js",
   "scripts": {
