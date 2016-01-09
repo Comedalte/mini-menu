@@ -107,7 +107,7 @@ process.stdin.on('keypress', function (ch, key) {
 		process.stdin.pause();
 	}
 
-	if (key.name=="down") {
+	if (key.hasOwnProperty("name") && key.name=="down") {
 
 		if (currentMenu.selected+1<currentMenu.items.length) {
 			currentMenu.selected++;
@@ -117,7 +117,7 @@ process.stdin.on('keypress', function (ch, key) {
 		
 	}
 
-	if (key.name=="up") {
+	if (key.hasOwnProperty("name") && key.name=="up") {
 		if (currentMenu.selected>0) 
 			currentMenu.selected--;
 
@@ -126,7 +126,7 @@ process.stdin.on('keypress', function (ch, key) {
 
 	}
 
-	if (key.name=="return") {
+	if (key.hasOwnProperty("name") && key.name=="return") {
 
 		currentMenu.clear();
 		rl.close();
